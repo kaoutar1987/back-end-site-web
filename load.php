@@ -22,6 +22,7 @@ if (isset($_SESSION['id'])) {
         //$log_query = mysqli_query($conn,$query);
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,11 +59,13 @@ if (isset($_SESSION['id'])) {
 
     <div class="brand">The Perfect Cup</div>
     <div class="address-bar">3481 Melrose Place | Beverly Hills, CA 90210 | 123.456.7890</div>
-   
+
     <!-- Navigation -->
 
 
-     <nav class="navbar navbar-default" role="navigation">
+
+
+<nav class="navbar navbar-default" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -105,72 +108,51 @@ if (isset($_SESSION['id'])) {
         </div>
         <!-- /.container -->
     </nav>
-    
+
+
     <div class="container">
 
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">
-                <h2 class="text-center">Welcome </h2>
-                    
-                <hr>
+                <h2 class="text-center">Welcome  </h2>
+                    <hr>
                     <h2 class="intro-text text-center">The Perfect Cup
                         <strong>blog</strong>
                     </h2>
                     <hr>
                 </div>
-                <?php 
-                            $query = "SELECT * FROM product";
-                            $load_product_query = mysqli_query($conn,$query);
-
-                            if (!$load_product_query) {
-                                die("QUERY FAILED". mysqli_error($conn));
-                            }
-
-                            while ($row = mysqli_fetch_array($load_product_query)) {
-                                $id_prod = $row['id_prod'];
-                                $title_prod = $row['title_prod'];
-                                $image_prod = $row['image_prod'];
-                                $desc_prod = $row['desc_prod'];
-                                $info_prod = $row['info_prod'];
-                                $date_prod = $row['date_prod'];
-
-                                ?>
-                        
                 <div class="col-lg-12 text-center">
-                    <img class="img-responsive img-border img-full" src="img/<?php echo $image_prod ?>" alt="<?php echo $image_prod ?>">
-                    <h2><?php echo $title_prod ?>
+                    <img class="img-responsive img-border img-full" src="img/slide-1.jpg" alt="">
+                    <h2>COCONUT OIL COFFEE
                         <br>
-                        <small><?php echo $date_prod ?></small>
+                        <small>October 13, 2013</small>
                     </h2>
-                    <p><?php echo $desc_prod ?>.</p>
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal<?php echo $id_prod ?>">Read More</button>
-                    <a href = "admin/cart.php?articl=<?php echo $id_prod ?>" class="btn btn-success btn-lg" data-dismiss="modal">Add To Cart</a>
+                    <p>Start your morning off with this great recipe for hot coffee with coconut oil and butter.</p>
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Read More</button>
                      <hr>
                 </div>
-                 <!--Modal-1-->
-	<div id="myModal<?php echo $id_prod ?>" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-            <!--Modal Content-->
-            <div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss-="modal">&times;</button>
-				<h4 class="modal-title"><?php echo $title_prod ?></h4>
-			</div>
-			<div class="modal-body">
-				<p><?php echo $info_prod ?></p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-            
-            </div>
-		</div>
-	</div>
-                        <?php
-                            }
-                        ?>
-                
+                <div class="col-lg-12 text-center">
+                    <img class="img-responsive img-border img-full" src="img/slide-2.jpg" alt="">
+                    <h2>IRISH COFFEE
+                        <br>
+                        <small>October 13, 2013</small>
+                    </h2>
+                    <p>Take the edge off with a fresh hot cup of coffee make with Irish whiskey and Irish cream.</p>
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Read More</button>
+                     <hr>
+                </div>
+                <div class="col-lg-12 text-center">
+                    <img class="img-responsive img-border img-full" src="img/slide-3.jpg" alt="">
+                    <h2>FROZEN CARAMEL LATTE
+                        <br>
+                        <small>October 13, 2013</small>
+                    </h2>
+                    <p>Sweetened with caramel sauce and topped with whipped cream, this will make you happy any time of the day.</p>
+                    
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal3">Read More</button>
+                    <hr>
+                </div>
                 <div class="col-lg-12 text-center">
                     <ul class="pager">
                         <li class="previous"><a href="#">&larr; Older</a>
@@ -184,8 +166,62 @@ if (isset($_SESSION['id'])) {
 
     </div>
     <!--container -->
+    <!--Modal-1-->
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+            <!--Modal Content-->
+            <div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss-="modal">&times;</button>
+				<h4 class="modal-title">Coconut Oil Coffee</h4>
+			</div>
+			<div class="modal-body">
+				<p>Sample Text</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+		</div>
+	</div>
    
+    <!--Modal-2-->
+	<div id="myModal2" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+            <!--Modal Content-->
+            <div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss-="modal">&times;</button>
+				<h4 class="modal-title">Irish Coffee</h4>
+			</div>
+			<div class="modal-body">
+				<p>Sample Text</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+		</div>
+	</div>
    
+    <!--Modal-3-->
+	<div id="myModal3" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+            <!--Modal Content-->
+            <div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss-="modal">&times;</button>
+				<h4 class="modal-title">Frozen Caramel Latte</h4>
+			</div>
+			<div class="modal-body">
+				<p>Sample Text</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+		</div>
+	</div>
     <footer>
         <div class="container">
             <div class="row">

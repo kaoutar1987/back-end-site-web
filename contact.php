@@ -1,3 +1,5 @@
+
+<?php require_once "db.php";?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,6 +39,74 @@
     <div class="address-bar">3481 Melrose Place | Beverly Hills, CA 90210 | 123.456.7890</div>
 
     <?php include "navbar.php"?>
+    <?php
+        
+
+        $alert = "";
+        if (isset($_POST['contact'])) {
+            $fname = $_POST['fname'];
+            $email = $_POST['email'];
+            $message = $_POST['message'];
+        
+            $mailTo = "kaoutarhabach@gmail.com";
+            $headers = "From :". $email;
+            $txt = "you have received an e-mail from ".$fname." ".$email.".\n\n".$message;
+
+            if (strlen($fname)<2){
+
+                $alert = "<div class='alert alert-danger'>your first name is too short</div>";
+    
+            }else if (strlen($subject)<2){
+
+                $alert = "<div class='alert alert-danger'>your subject is too short</div>";
+    
+            }else if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+
+                $alert = "<div class='alert alert-danger'>your email format is invalid</div>";
+    
+            }else if ($message == ""){
+
+                $alert = "<div class='alert alert-danger'>message field should not be empty</div>";
+    
+            }else{
+
+                require 'PHPMailer/PHPMailerAutoload.php';
+
+                    $mail = new PHPMailer;
+
+                    //$mail->SMTPDebug = 3;                               // Enable verbose debug output
+
+                    $mail->isSMTP();                                      // Set mailer to use SMTP
+                    $mail->Host = 'smtp.gmail.com;';  // Specify main and backup SMTP servers
+                    $mail->SMTPAuth = true;                               // Enable SMTP authentication
+                    $mail->Username = 'phptestmail78@gmail.com';                 // SMTP username
+                    $mail->Password = '1234AZER';                           // SMTP password
+                    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+                    $mail->Port = 587;                                    // TCP port to connect to
+
+                    $mail->setFrom($email);
+                    $mail->addAddress('kaoutarhabach@gmail.com');
+
+                    
+                    $mail->isHTML(true);                                  // Set email format to HTML
+
+                    $mail->Subject = $subject;
+                    $mail->Body    = $txt;
+                   
+
+                    if(!$mail->send()) {
+                        echo 'Message could not be sent.';
+                        echo 'Mailer Error: ' . $mail->ErrorInfo;
+                    } else {
+                        $alert = "<div class='alert alert-success'>your message has been sent successfully</div>";
+                    }
+            }
+
+            
+        }
+    
+    
+    ?>
 
     <div class="container">
 
@@ -62,7 +132,8 @@
                     </p>
                     <p>Address:
                         <strong>3481 Melrose Place
-                            <br>Beverly Hills, CA 90210</strong>
+                        <br>Beverly Hills, CA 90210 <?php echo $alert; ?></strong>
+                           
                     </p>
                 </div>
                 <div class="clearfix"></div>
@@ -78,7 +149,7 @@
                     </h2>
                     <hr>
                     <div id="add_err2"></div>
-                    <form role="form">
+                    <form role="form" action ="contact.php" method = "post">
                         <div class="row">
                             <div class="form-group col-lg-4">
                                 <label>Name</label>
